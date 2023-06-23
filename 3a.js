@@ -96,6 +96,13 @@ function handleOptionClick(vegetableName, option) {
   displayOptionDetails(option, value);
 }
 
+const userInput = document.getElementById('userInput');
+userInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+});
+
 function resetChat() {
   messageContainer.innerHTML = '';
   resetButton.disabled = true;
