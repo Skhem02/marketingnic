@@ -10,6 +10,7 @@ html, body {
   flex-direction: column;
   justify-content: flex-end;
   background-color: skyblue;
+  position: relative;
 }
 
 #messageContainer {
@@ -43,6 +44,12 @@ html, body {
   padding: 10px 20px;
 }
 
+.inputSection {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
 input[type="text"] {
   flex-grow: 1;
   padding: 8px;
@@ -62,4 +69,8 @@ button {
 
 .rounded-button {
   border-radius: 50%;
+}
+
+#resetButton {
+  margin-right: 10px;
 }
