@@ -8,39 +8,45 @@ const vegetableData = {
     nextYearPrice: "Rs: 9"
   },
   carrot: {
-    price: "Rs: 9",
+    price: "Rs: 8",
     market: "Supermarket",
     season: "Year-round",
     growingSeason: "March - November",
     nextYearPrice: "Rs: 10"
   },
   spinach: {
-    price: "Rs: 9",
+    price: "Rs: 7",
     market: "Organic Food Store",
     season: "Spring, Fall",
     growingSeason: "March - May, September - November",
-    nextYearPrice: "Rs: 10"
+    nextYearPrice: "Rs: 9"
   },
-  // Add more vegetable details here...
+  // Add more vegetable data here...
 };
 
+const messageContainer = document.getElementById('messageContainer');
+const resetButton = document.getElementById('resetButton');
+
 function displayUserMessage(message) {
-  const messageContainer = document.getElementById('messageContainer');
-  const messageHTML = `<div class="message user-message">${message}</div>`;
-  messageContainer.innerHTML += messageHTML;
+  const userMessage = `
+    <div class="message user-message">
+      ${message}
+    </div>
+  `;
+  messageContainer.innerHTML += userMessage;
 }
 
 function displaySystemMessage(message) {
-  const messageContainer = document.getElementById('messageContainer');
-  const messageHTML = `<div class="message system-message">${message}</div>`;
-  messageContainer.innerHTML += messageHTML;
+  const systemMessage = `
+    <div class="message system-message">
+      ${message}
+    </div>
+  `;
+  messageContainer.innerHTML += systemMessage;
 }
 
-function displayOptions(vegetableName, vegetableOptions) {
-  const buttonHTML = vegetableOptions
-    .map(option => `<button onclick="handleOptionClick('${vegetableName}', '${option}')">${option}</button>`)
-    .join(' ');
-
+function displayOptions(vegetableName, options) {
+  const buttonHTML = options.map(option => `<button onclick="handleOptionClick('${vegetableName}', '${option}')">${option}</button>`).join(' ');
   const systemMessage = `
     <div class="system-message">
       <strong>Choose an option:</strong><br>
@@ -61,9 +67,9 @@ function displayOptionDetails(option, value) {
 
 function sendMessage() {
   const userInput = document.getElementById('userInput');
-  const userMessage = userInput.value;
+  const userMessage = userInput.value.trim();
 
-  if (userMessage.trim() === '') {
+  if (userMessage === '') {
     return;
   }
 
@@ -71,6 +77,7 @@ function sendMessage() {
   processUserMessage(userMessage);
 
   userInput.value = '';
+  resetButton.disabled = false;
 }
 
 function processUserMessage(message) {
@@ -87,4 +94,9 @@ function processUserMessage(message) {
 function handleOptionClick(vegetableName, option) {
   const value = vegetableData[vegetableName][option];
   displayOptionDetails(option, value);
+}
+
+function resetChat() {
+  messageContainer.innerHTML = '';
+  resetButton.disabled = true;
 }
